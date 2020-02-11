@@ -3,10 +3,10 @@ from peewee import *
 DATABASE = SqliteDatabase('bands.sqlite')
 
 class Band(Model):
-	year_formed: IntegerField()
-	vocals: CharField()
-	guitar: CharField()
-	drums: CharField()
+	year_formed = IntegerField()
+	vocals = CharField()
+	guitar = CharField()
+	drums = CharField()
 
 
 	class Meta:
