@@ -4,6 +4,7 @@ DATABASE = SqliteDatabase('bands.sqlite')
 
 class Band(Model):
 	year_formed = IntegerField()
+	name = CharField()
 	vocals = CharField()
 	guitar = CharField()
 	drums = CharField()
