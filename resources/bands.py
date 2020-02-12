@@ -12,7 +12,7 @@ def bands_index():
 	
 	return jsonify(
 			data=band_dicts,
-			message=f'sucessfully retireved {len(band_dicts)} dogs',
+			message=f'sucessfully retireved {len(band_dicts)} bands',
 			status=200
 		), 200
 
