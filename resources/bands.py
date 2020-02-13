@@ -16,6 +16,16 @@ def bands_index():
 			status=200
 		), 200
 
+@bands.route('/<id>', methods=['Delete'])
+def delete_band(id):
+	delete_query = models.Band.delete().where(models.Band.id == id)
+	delete_query.execute()
+	return jsonify(
+		data={}, 
+		message=f'sucessfully deleted band with id: {id}',
+		status=200
+	), 200
+
 
 
 @bands.route('/', methods=['POST'])
