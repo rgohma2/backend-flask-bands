@@ -26,7 +26,18 @@ def delete_band(id):
 		status=200
 	), 200
 
+@bands.route('/<id>', methods=['PUT'])
+def update_band(id):
+	payload = request.get_json()
+	update_query = models.Band.update(**payload).where(models.Band.id == id)
+	update_query.execute()
 
+	updated_band = models.Band.get_by_id(id)
+	return jsonify(
+		data=model_to_dict(updated_band),
+		message=f'Successfully updated band at index {id}',
+		status=200
+	), 200
 
 @bands.route('/', methods=['POST'])
 def create_band():
