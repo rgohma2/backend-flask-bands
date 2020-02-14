@@ -16,7 +16,7 @@ class User(Model, UserMixin):
 class Band(Model):
 	year_formed = IntegerField()
 	name = CharField()
-	vocals = CharField()
+	vocals = ForeignKeyField(User, backref='bands')
 	guitar = CharField()
 	drums = CharField()
 

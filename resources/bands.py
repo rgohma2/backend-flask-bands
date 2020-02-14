@@ -1,7 +1,11 @@
 import models
 from flask import Blueprint, request, jsonify
 
+from flask_login import current_user
+
 from playhouse.shortcuts import model_to_dict
+
+
 
 bands = Blueprint('bands', 'bands')
 
@@ -39,13 +43,25 @@ def update_band(id):
 		status=200
 	), 200
 
+
+
+
+
+
 @bands.route('/', methods=['POST'])
 def create_band():
 	payload = request.get_json()
-	print('payload >> ',payload)
-	band = models.Band.create(year_formed=payload['year_formed'], name=payload['name'], vocals=payload['vocals'], guitar=payload['guitar'], drums=payload['drums'])
+	payload['vocals'] = current_user.id
+	band = models.Band.create(**payload)
 	print(band)
 
 	band_dict=model_to_dict(band)
+	band_dict['vocals'].pop('password')
 
 	return(jsonify(data=band_dict, status={'message': 'sucessfully created a band'})), 201
+
+
+
+
+
+

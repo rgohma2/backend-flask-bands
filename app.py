@@ -26,6 +26,15 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+@login_manager.user_loader
+def load_user(id):
+	try:
+		return models.User.get(models.User.id == id)
+	except models.DoesNotExist:
+		None
+
+
+
 CORS(bands, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 
