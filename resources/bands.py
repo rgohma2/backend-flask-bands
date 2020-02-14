@@ -1,7 +1,7 @@
 import models
 from flask import Blueprint, request, jsonify
 
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 from playhouse.shortcuts import model_to_dict
 
@@ -21,6 +21,7 @@ def bands_index():
 		), 200
 
 @bands.route('/<id>', methods=['Delete'])
+@login_required
 def delete_band(id):
 	delete_query = models.Band.delete().where(models.Band.id == id)
 	delete_query.execute()
@@ -31,6 +32,7 @@ def delete_band(id):
 	), 200
 
 @bands.route('/<id>', methods=['PUT'])
+@login_required
 def update_band(id):
 	payload = request.get_json()
 	update_query = models.Band.update(**payload).where(models.Band.id == id)
@@ -49,6 +51,7 @@ def update_band(id):
 
 
 @bands.route('/', methods=['POST'])
+@login_required
 def create_band():
 	payload = request.get_json()
 	payload['vocals'] = current_user.id
