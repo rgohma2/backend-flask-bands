@@ -18,6 +18,14 @@ PORT=8000
 
 app = Flask(__name__)
 
+
+app.secret_key = "Come from the land of the ice and snow"
+
+login_manager = LoginManager()
+
+login_manager.init_app(app)
+
+
 CORS(bands, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 

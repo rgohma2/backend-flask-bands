@@ -12,7 +12,7 @@ class User(Model, UserMixin):
 
 	class Meta:
 		database = DATABASE
-		
+
 class Band(Model):
 	year_formed = IntegerField()
 	name = CharField()
@@ -26,6 +26,6 @@ class Band(Model):
 
 class initialize():
 	DATABASE.connect()
-	DATABASE.create_tables([Band], safe=True)
+	DATABASE.create_tables([User, Band], safe=True)
 	DATABASE.close()
 
