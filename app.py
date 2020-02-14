@@ -1,6 +1,6 @@
 # print('Hello, world!')
 
-from flask import Flask, g
+from flask import Flask, g, jsonify
 
 from flask_cors import CORS
 
@@ -32,6 +32,16 @@ def load_user(id):
 		return models.User.get(models.User.id == id)
 	except models.DoesNotExist:
 		None
+
+@login_manager.unauthorized_handler
+def unauthorized():
+	return jsonify(
+			data={
+				"Error": "authentication failed"
+			},
+			message='User not logged in.',
+			status=401
+		), 401
 
 
 
